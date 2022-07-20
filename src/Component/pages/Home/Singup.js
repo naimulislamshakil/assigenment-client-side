@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Singup = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const createUser = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -16,7 +21,12 @@ const Singup = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        toast.success(data.message);
+        if (data.message) {
+          navigate(from, { replace: true });
+        }
+      });
   };
   return (
     <div>
