@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ user, setUser }) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    setUser({});
+    navigate("/login");
+  };
   const navBar = (
     <>
       <li>
@@ -9,16 +14,28 @@ const Navbar = () => {
           Home
         </Link>
       </li>
-      <li>
-        <Link className="btn-outline font-bold" to="/login">
-          Login
-        </Link>
-      </li>
-      <li>
-        <Link className="btn-outline font-bold" to="/singup">
-          Sing Up
-        </Link>
-      </li>
+      {user && user._id ? (
+        <>
+          <li>
+            <button className="link btn-outline font-bold" onClick={logout}>
+              LogOut
+            </button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link className="btn-outline font-bold" to="/login">
+              Login
+            </Link>
+          </li>
+          <li>
+            <Link className="btn-outline font-bold" to="/singup">
+              Sing Up
+            </Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (

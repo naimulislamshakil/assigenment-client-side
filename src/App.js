@@ -6,14 +6,16 @@ import Login from "./Component/pages/Home/Login";
 import Singup from "./Component/pages/Home/Singup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState({});
   return (
     <div className="container mx-auto">
-      <Navbar></Navbar>
+      <Navbar user={user} setUser={setUser}></Navbar>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/login" element={<Login setUser={setUser} />}></Route>
         <Route path="/singup" element={<Singup />}></Route>
       </Routes>
       <ToastContainer></ToastContainer>

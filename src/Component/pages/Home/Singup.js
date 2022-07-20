@@ -22,8 +22,10 @@ const Singup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success(data.message);
-        if (data.message) {
+        if (data.message === "User alrady insert.") {
+          toast.error(data.message);
+        } else {
+          toast.success(data.message);
           navigate(from, { replace: true });
         }
       });

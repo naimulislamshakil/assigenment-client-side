@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -22,6 +22,7 @@ const Login = () => {
       .then((data) => {
         console.log(data);
         if (data.message === "User valid") {
+          setUser(data.user);
           navigate(from, { replace: true });
         } else {
           toast.error(data.message);
