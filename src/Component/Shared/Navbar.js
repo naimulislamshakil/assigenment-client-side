@@ -17,6 +17,11 @@ const Navbar = ({ user, setUser }) => {
       {user && user._id ? (
         <>
           <li>
+            <Link className="btn-outline font-bold" to="/dashboard">
+              Dashboard
+            </Link>
+          </li>
+          <li>
             <button className="link btn-outline font-bold" onClick={logout}>
               LogOut
             </button>

@@ -20,7 +20,6 @@ const Login = ({ setUser }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.message === "User valid") {
           setUser(data.user);
           navigate(from, { replace: true });
